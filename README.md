@@ -12,6 +12,22 @@
 
 ---
 
+## Table of Contents
+
+- [📌 Workflow Overview](#-workflow-overview)
+- [⚙️ Installation](#️-installation)
+  - [🧱 Label Studio Environment](#-label-studio-environment)
+  - [🧠 Tiamat Environment](#-tiamat-environment)
+- [📁 Project Folder Structure](#-project-folder-structure)
+- [🚀 Usage](#-usage)
+  - [📋 Notebook Execution Order](#-notebook-execution-order)
+  - [🔄 Iterative Workflow](#-iterative-workflow)
+  - [🧾 Shared Variables Across Notebooks](#-shared-variables-across-notebooks)
+- [🧰 Requirements](#-requirements)
+- [📜 License & Attribution](#-license--attribution)
+
+---
+
 ## 📌 Workflow Overview
 
 Each step of the pipeline is handled in a dedicated Jupyter notebook.  
@@ -298,7 +314,7 @@ They define paths, session names, and model references needed throughout the pip
 | `project_folder` | Absolute path to the folder named after your project |
 | `data_folder` | Absolute path to the global `data/` directory |
 | `training_folder` | Path to the folder where the current training session is stored |
-| `pretrained_model` | Path to a YOLOv8 `.pt` file if training starts from a pretrained model |
+| `pretrained_model` | Path to a YOLO `.pt` file if training starts from a pretrained model |
 | `interrupted_model_folder` | Path to an existing model folder to resume interrupted training |
 | `img_dataset_folder` | Absolute path to a folder containing images only (no annotations) |
 | `yolo_model_folder` | Path to the dataset prepared for training (contains `images/`, `labels/`, and `labels.txt`) |
