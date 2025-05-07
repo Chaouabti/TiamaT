@@ -1,0 +1,21 @@
+# Ignore folders
+data/
+output/
+project/
+label-studio_env/
+tiamat_env/
+output/
+
+# Keep any .gitkeep file anywhere in the project
+!**/.gitkeep
+
+# Ignore Jupyter Notebook checkpoints
+**/.ipynb_checkpoints/
+
+# Ignore OS/system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore temporary or backup files
+*.swp
+*~
