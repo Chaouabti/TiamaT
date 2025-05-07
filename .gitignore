@@ -1,21 +1,46 @@
-# Ignore folders
-data/
-output/
-project/
-label-studio_env/
-tiamat_env/
-output/
+# TiamaT Project
+# See: https://git-scm.com/docs/gitignore for syntax details
 
-# Keep any .gitkeep file anywhere in the project
+## 1. Build, Output & Data Directories
+/data/
+/output/
+
+## 2. Virtual Environments
+/label-studio_env/
+/tiamat_env/
+/.venv/
+/env/
+/venv/
+
+## 3. Project Skeleton Directories
+/project/**
+!project/
+
+## 4. Keep .gitkeep Files to Preserve Empty Folders
 !**/.gitkeep
 
-# Ignore Jupyter Notebook checkpoints
-**/.ipynb_checkpoints/
+## 5. Python Bytecode & C Extensions
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Ignore OS/system-specific files
+## 6. Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+## 7. Logs & Databases
+*.log
+*.sqlite3
+
+## 8. IDE & Editor Settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+## 9. OS & System Files
 .DS_Store
 Thumbs.db
 
-# Ignore temporary or backup files
+## 10. Temporary & Backup Files
 *.swp
 *~
