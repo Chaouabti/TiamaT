@@ -14,7 +14,9 @@
 
 ## 3. Project Skeleton Directories
 /project/**
+!project/**/
 !project/
+!project/**/*.gitkeep
 
 ## 4. Keep .gitkeep Files to Preserve Empty Folders
 !**/.gitkeep
