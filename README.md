@@ -134,7 +134,7 @@ The model is not evaluated on a classic "test set", but rather through manual co
         ┌────────────────────────────┐
         │ 0. Launch Label Studio     │
         └─────────────┬──────────────┘                              
-                  	  ▼                          
+                      ▼    
         ┌────────────────────────────┐           
         │ 1. Extract Training Data   │           
         └─────────────┬──────────────┘           
