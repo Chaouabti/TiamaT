@@ -17,7 +17,10 @@
 !project/
 !project/**/*.gitkeep
 
-!/data/**
+/data/**
+!data/**/
+!data/
+!data/*.gitkeep
 
 ## 4. Keep .gitkeep Files to Preserve Empty Folders
 !**/.gitkeep
