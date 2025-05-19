@@ -2,7 +2,6 @@
 # See: https://git-scm.com/docs/gitignore for syntax details
 
 ## 1. Build, Output & Data Directories
-/data/
 /output/
 
 ## 2. Virtual Environments
@@ -17,6 +16,8 @@
 !project/**/
 !project/
 !project/**/*.gitkeep
+
+!/data/**
 
 ## 4. Keep .gitkeep Files to Preserve Empty Folders
 !**/.gitkeep

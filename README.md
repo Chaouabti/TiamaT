@@ -133,9 +133,8 @@ The model is not evaluated on a classic "test set", but rather through manual co
 ```text
         ┌────────────────────────────┐
         │ 0. Launch Label Studio     │
-        └─────────────┬──────────────┘           
-                   	  │                         
-                  	  ▼                          
+        └─────────────┬──────────────┘                                  
+                      ▼                 
         ┌────────────────────────────┐           
         │ 1. Extract Training Data   │           
         └─────────────┬──────────────┘           
@@ -215,9 +214,8 @@ Before installing, make sure you have:
 - `label_studio.txt` or `label_studio_environment.yml`
 - `tiamat.txt` or `tiamat_environment.yml`
 
-> ⚠️ **PyTorch is not included in the TiamaT environment files.**  
-> You must install it manually according to your machine’s configuration (CPU / GPU / CUDA).  
-> 👉 See: [https://pytorch.org/get-started/locally](https://pytorch.org/get-started/locally)
+> ⚠️ **PyTorch and Torchvision** are installed automatically as dependencies of [Ultralytics](https://github.com/ultralytics/ultralytics).  
+> If you encounter issues with GPU support or CUDA versions, refer to [PyTorch installation guide](https://pytorch.org/get-started/locally) to reinstall a suitable version.
 
 ---
 
