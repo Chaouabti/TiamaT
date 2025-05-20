@@ -1,6 +1,0 @@
-'0': 'Banderole'
-'1': 'Codex'
-'2': 'Horn Book'
-'3': 'Scroll'
-'4': 'Single-Sheet Document'
-'5': 'Wooden tablet codex'
