@@ -1,0 +1,17 @@
+name: label-studio_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip=24.2
+  - jupyterlab=4.0.11
+  - ipykernel=6.29.5
+  - pandas=2.2.2
+  - numpy=1.26.4
+  - matplotlib=3.8.4
+  - pillow=10.2.0
+  - tqdm=4.66.2
+  - cython=3.0.10
+  - pip:
+      - label-studio-sdk==1.0.5
+      - label-studio==1.13.1
