@@ -11,11 +11,11 @@ Functions included:
 5. exclude_training_images: Filters out images used for training from a list of file paths.
 """
 
-import os
 import glob
 import json
+from pathlib import Path
 
-def open_json_file(file_name):
+def open_json_file(file_name:str) -> dict:
     """
     This function opens corrected annotation files retrieved from Label Studio, in JSON format.
     
@@ -28,7 +28,7 @@ def open_json_file(file_name):
         - Description: A dictionary containing the contents of the JSON file.
         """
     
-    with open(file_name, 'r') as correction_file:
+    with open(file_name, 'r', encoding='utf-8') as correction_file:
         return json.load(correction_file)
 
 def save_json_file(file_name, data):
@@ -44,10 +44,10 @@ def save_json_file(file_name, data):
         - Description: A dictionary containing the corrected annotation data to be saved in the JSON file.
     """
     
-    with open(file_name, 'w') as corrected_file:
+    with open(file_name, 'w', encoding='utf-8') as corrected_file:
         json.dump(data, corrected_file, indent=4)
 
-def change_id(json_file):
+def change_id(json_file:str) -> None:
     """
     This function changes the 'id' field in the JSON file to the basename of the file path.
 
@@ -59,13 +59,11 @@ def change_id(json_file):
     """
     
     data = open_json_file(json_file)
-    data['id'] = os.path.basename(json_file)
-
-    with open(json_file, "w") as annotation:
-        json.dump(data, annotation, indent=4)
+    data['id'] = Path(json_file).stem
+    save_json_file(json_file, data)
     print(f'Modifications done in {json_file}')
 
-def get_files(folder, extension):
+def get_files(folder:str, extension:str) -> list:
     """
     This function retrieves a list of files with a specific extension from a folder.
 
@@ -81,9 +79,9 @@ def get_files(folder, extension):
         - Type: list of str
         - Description: A list of file paths matching the specified extension within the provided folder.
     """
-    return glob.glob(os.path.join(folder, f'*.{extension}'))
+    return list(Path(folder).rglob(f'*.{extension}'))
 
-def exclude_training_images(files, img_use_for_training):
+def exclude_training_images(files:list, img_use_for_training:list) -> list:
     """
     This function filters out files that correspond to images used for training from a list of files.
 
@@ -99,9 +97,8 @@ def exclude_training_images(files, img_use_for_training):
         - Type: list of str
         - Description: A filtered list of file paths excluding those corresponding to images used for training.
     """
-    
-    return [file for file in files if os.path.basename(file.replace('txt', 'jpg')) not in img_use_for_training]
-
+    stems_used = {Path(img).stem for img in img_use_for_training}
+    return [file for file in files if file.stem not in stems_used]
 
 def load_data_from_files(file_paths):
     """
@@ -122,8 +119,41 @@ def load_data_from_files(file_paths):
 
     data_list = []
     for file_path in file_paths:
-        with open(file_path, 'r') as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             lines = file.readlines()
             for line in lines:
                 data_list.append(line.strip())
     return data_list
+
+def find_image_path(img_folder: Path, image_name: str) -> Path:
+    """
+    Finds the image file in the specified folder matching the given base name, regardless of extension.
+
+    Parameters
+    ----------
+    img_folder : Path
+        Path to the folder containing the image files.
+
+    image_name : str
+        Base name of the image file (without extension).
+
+    Returns
+    -------
+    Path
+        Full path to the image file with its correct extension.
+
+    Raises
+    ------
+    FileNotFoundError
+        If no image file matching the base name is found in the folder.
+
+    Notes
+    -----
+    Supported extensions are: .jpg, .jpeg, .png, .tiff
+    """
+
+    for ext in {'.jpg', '.jpeg', '.png', '.tiff'}:
+        candidate = img_folder / f"{image_name}{ext}"
+        if candidate.exists():
+            return candidate
+    raise FileNotFoundError(f"No image found for '{image_name}' in {img_folder}")

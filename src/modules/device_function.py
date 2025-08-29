@@ -1,39 +1,34 @@
 import torch
 
-def which_device():
+def which_device() -> str:
     """
-    Detects the best available device for PyTorch (CUDA, MPS, XLA/TPU, or CPU).
+    Detects the best available device for PyTorch-based inference (CUDA, MPS, XLA/TPU, or CPU).
 
-    :return:
-        - Type: torch.device or torch_xla.core.xla_model.XlaDevice
-        - Description:
-            - 'cuda' if an NVIDIA GPU is available,
-            - 'mps' if on Apple Silicon with MPS support,
-            - 'xla' if a TPU is accessible via torch_xla,
-            - otherwise 'cpu'.
+    Returns
+    -------
+    str
+        The best available device, one of: 'cuda', 'mps', 'xla', or 'cpu'.
     """
-    # 1. CUDA
+
+    # 1. CUDA (NVIDIA GPUs)
     if torch.cuda.is_available():
-        dev = torch.device("cuda")
-        print(f"Using CUDA GPU: {torch.cuda.get_device_name(0)}")
-        return dev
-    """
-    # 2. MPS (Apple Silicon)
-    if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
-        dev = torch.device("mps")
-        print("Using Apple Silicon GPU (MPS)")
-        return dev"""
+        print(f"✅ Using CUDA GPU: {torch.cuda.get_device_name(0)}")
+        return "cuda"
 
-    # 3. TPU via XLA
+    """# 2. MPS (Apple Silicon GPUs)
+    if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+        print("✅ Using Apple Silicon GPU (MPS)")
+        return "mps"""
+
+    # 3. TPU (XLA - PyTorch/XLA)
     try:
         import torch_xla.core.xla_model as xm
         dev = xm.xla_device()
-        print(f"Using TPU: {dev}")
-        return dev
+        print(f"✅ Using TPU: {dev}")
+        return "xla"
     except ImportError:
-        pass  # torch_xla non installé ou pas de TPU
+        pass  # torch_xla not installed or no TPU available
 
-    # 4. Fallback CPU
-    dev = torch.device("cpu")
-    print("Using CPU")
-    return dev
+    # 4. CPU fallback
+    print("⚠️ Using CPU")
+    return "cpu"
