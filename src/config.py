@@ -21,9 +21,9 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 TRAINING_FOLDER = os.path.join(DATA_DIR, PROJECT_NAME)
 
 IMG_DATASET_FOLDER = os.getenv("img_dataset_folder", os.path.join(PROJECT_DIR, "image_inputs", "ground_truth_images"))
-MODEL_FOLDER = os.getenv("model_folder", os.path.join(OUTPUT_DIR, "runs", "train", "MODEL_NAME"))
+MODEL_FOLDER = Path(os.getenv("model_folder", Path(OUTPUT_DIR) / "runs" / "train" / "MODEL_NAME")) # Correction de la manière de construire le chemin
 PRETRAINED_MODEL = os.getenv("pretrained_model", os.path.join(MODEL_FOLDER, "weights", "best.pt"))
-INTERRUPED_MODEL = os.getenv("interrupted_model_folder", os.path.join(MODEL_FOLDER, "weights", "last.pt"))
+INTERRUPED_MODEL = Path(os.getenv("interrupted_model_folder", Path(MODEL_FOLDER) / "weights" / "last.pt")) # Correction de la manière de construire le chemin
 
 # --- Utility: display config if needed ---
 def show_config():
