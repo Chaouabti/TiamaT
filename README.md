@@ -177,14 +177,12 @@ They define core paths, session parameters, and model references, and are typica
 
 | Variable | Description |
 |----------|-------------|
-| `PROJECT_NAME` | Project name used in folder paths |
-| `LS_PORT` | Port to run Label Studio locally |
-| `project_folder` | Path to the current project's folder (under `project/`) |
-| `data_folder` | Output folder for YOLO-ready datasets (`data/`) |
-| `training_folder` | Path to the training dataset inside `data/` |
-| `img_dataset_folder` | Path to images used for inference |
-| `model_folder` | Path to a YOLO model used for inference or evaluation |
-| `pretrained_model` | Path to a pre-trained YOLO model (optional) |
+| `project_folder` | Absolute path to the folder containing your dataset. By default, this is `project/`, but it can be renamed freely. |
+| `model_folder` | Path to the YOLOv8 model directory used for inference or evaluation (e.g., `output/runs/train/model_name/`) |
+| `pretrained_model` | Path to a pre-trained YOLOv8 model (e.g., `best.pt`) if you want to fine-tune instead of training from scratch |
+
+📌 `project_folder` is the central directory used throughout the pipeline.  
+Make sure the structure inside follows the [Project Folder Structure](#-project-folder-structure) for the notebooks to run correctly.
 
 These variables are typically defined in your `.env` file and automatically loaded into both notebooks and scripts at runtime.
 
